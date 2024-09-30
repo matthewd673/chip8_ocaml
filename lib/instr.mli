@@ -1,8 +1,14 @@
+open Stdint
+
+type addr
+type reg
+type byte
+type nibble
+
 type instr
 
-(** [of_u16 u16] parses [u16] to an instruction if it matches any.
-    Requires: [u16 >= 0 and u16 <= 65535] *)
-val of_u16 : int -> instr
+(** [of_u16 u16] parses [u16] to an instruction if it matches any. *)
+val of_u16 : Uint16.t -> instr
 
 (** [to_string instr] creates a string representation of [instr]. *)
 val to_string : instr -> string

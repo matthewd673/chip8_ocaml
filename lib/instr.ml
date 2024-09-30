@@ -57,10 +57,11 @@ let combine_addr = combine Uint16.of_int
 let combine_byte = combine Uint8.of_int
 
 let u16_to_parts u16 =
-  [(u16 land 0xF000) lsr 12;
-   (u16 land 0x0F00) lsr 8;
-   (u16 land 0x00F0) lsr 4;
-   (u16 land 0x000F);
+  let u16' = Uint16.to_int u16 in
+  [(u16' land 0xF000) lsr 12;
+   (u16' land 0x0F00) lsr 8;
+   (u16' land 0x00F0) lsr 4;
+   (u16' land 0x000F);
   ]
 ;;
 
