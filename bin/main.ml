@@ -21,7 +21,7 @@ let set_up () =
 
 let () =
   set_up ();
-  let (w, _) = Window.create () in
-  Window.begin_loop w;
-  Window.clean_up w;
+  let window = Window.create () in
+  Window.begin_loop window;
+  Window.clean_up window;
 ;;

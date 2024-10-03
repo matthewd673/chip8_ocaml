@@ -1,7 +1,10 @@
-open Tsdl
+type t
 
-val create : unit -> Sdl.window * Sdl.renderer
+(** [create] Create a new Window. *)
+val create : unit -> t
 
-val clean_up : Sdl.window -> unit
+(** [clean_up window] Clean up [window]. *)
+val clean_up : t -> unit
 
-val begin_loop : Sdl.window -> unit
+(** [begin_loop window] Begin running an event loop for [window]. *)
+val begin_loop : t -> unit
