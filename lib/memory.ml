@@ -1,4 +1,4 @@
-type memory = bytes
+type t = bytes
 
 let create = Bytes.create 4096;;
 

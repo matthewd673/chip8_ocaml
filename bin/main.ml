@@ -7,7 +7,7 @@ let read_bytes filename =
   Bytes.sub buf 0 len (* Return Bytes of exact length that was read *)
 ;;
 
-let () =
+let set_up () =
   (* Load data from rom file *)
   let filename = "roms/cavern.ch8" in
   let file_bytes = read_bytes filename in
@@ -16,4 +16,12 @@ let () =
   (* Create memory and write data into it *)
   let memory = Memory.create in
   Memory.write_all memory 0x200 file_bytes;
+;;
+
+
+let () =
+  set_up ();
+  let (w, _) = Window.create () in
+  Window.begin_loop w;
+  Window.clean_up w;
 ;;
