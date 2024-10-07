@@ -23,3 +23,7 @@ val read_byte : t -> int -> Char.t
     Read the word at [addr] in [memory].
     Requires: [addr] >= 0 and [addr] < 4096. *)
 val read_word : t -> int -> int
+
+(** [read_bytes memory addr n]
+    Read [n] bytes in [memory] starting at [addr]. *)
+val read_bytes : t -> int -> int -> Bytes.t

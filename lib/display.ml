@@ -2,13 +2,16 @@ open Tsdl
 
 type t = bool Array.t * Sdl.renderer
 
-let pix_scale = 2
+let width = 64
+let height = 32
+let len = width * height
+let scale = 4
 
 let create renderer =
-  (Array.make (64 * 32) false, renderer)
+  (Array.make len false, renderer)
 ;;
 
-let ind_of_coords x y = y * 64 + x;;
+let ind_of_coords x y = y * width + x;;
 
 let coords_of_ind i =
   let x = i mod 64 in
@@ -17,12 +20,19 @@ let coords_of_ind i =
 ;;
 
 let draw_sprite display sprite x y =
+  let (d_arr, _) = display in
   (* TODO: proper drawing *)
-  Array.set display (ind_of_coords x y) (Bytes.length sprite <> 0);
+  Array.set d_arr (ind_of_coords x y) (Bytes.length sprite <> 0);
+  false (* TODO: Return true if any pixels are erased. *)
+;;
+
+let clear display =
+  let (d_arr, _) = display in
+  Array.fill d_arr 0 len false;
 ;;
 
 let draw_pixel sdl_r i b =
-  let (x, y) = Display.coords_of_ind i in
+  let (x, y) = coords_of_ind i in
   let rect = Sdl.Rect.create ~x:(x * scale) ~y:(y * scale) ~w:scale ~h:scale in
   if b then
     Sdl.set_render_draw_color sdl_r 255 0 0 255 |> ignore;

@@ -5,7 +5,7 @@ type reg = Uint8.t
 type byte = Uint8.t
 type nibble = Uint8.t (* nibble is 4 bits *)
 
-type instr =
+type t =
   | SysAddr of addr
   | Cls
   | Ret

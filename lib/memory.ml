@@ -15,3 +15,5 @@ let read_word memory addr =
   let b2 = Char.code (read_byte memory (addr + 1)) in
   (b1 lsl 8) lor b2
 ;;
+
+let read_bytes memory addr n = Bytes.sub memory addr n;;
