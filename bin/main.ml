@@ -7,21 +7,22 @@ let read_bytes filename =
   Bytes.sub buf 0 len (* Return Bytes of exact length that was read *)
 ;;
 
-let set_up () =
+let () =
   (* Load data from rom file *)
   let filename = "roms/cavern.ch8" in
   let file_bytes = read_bytes filename in
   Printf.printf "Read %d bytes from %s\n" (Bytes.length file_bytes) filename;
 
-  (* Create memory and write data into it *)
+  (* Create SDL resources *)
+  let res = Sdl_wrapper.create_res () in
+  let (_, sdl_r) = res in
+
+  (* Create emulation components *)
   let memory = Memory.create in
   Memory.write_all memory 0x200 file_bytes;
-;;
+  let display = Display.create sdl_r in
+  let cpu = Cpu.create memory display in
 
-
-let () =
-  set_up ();
-  let window = Window.create () in
-  Window.begin_loop window;
-  Window.clean_up window;
+  Sdl_wrapper.begin_loop cpu;
+  Sdl_wrapper.clean_up_res res;
 ;;
